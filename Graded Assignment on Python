@@ -1,0 +1,50 @@
+#Q1 Create a Python script to check the strength of the password. 
+
+# Function to check password strength
+def check_password_strength(password): 
+    # Check minimum length first
+    if len(password) < 8:
+        print("Password is too short. It must be at least 8 characters long.")
+        return False
+
+    # Criteria flags
+    has_upper = False
+    has_lower = False
+    has_digit = False
+    has_special = False
+    special_characters = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+
+    # Check each character
+    for char in password:
+        if char.isupper():
+            has_upper = True
+        elif char.islower():
+            has_lower = True
+        elif char.isdigit():
+            has_digit = True
+        elif char in special_characters:
+            has_special = True
+
+    # Collect feedback for missing criteria
+    if not has_upper:
+        print("Missing an uppercase letter.")
+    if not has_lower:
+        print("Missing a lowercase letter.")
+    if not has_digit:
+        print("Missing a number.")
+    if not has_special:
+        print("Missing a special character.")
+
+    # Return True only if all conditions are satisfied
+    if has_upper and has_lower and has_digit and has_special:
+        return True
+    else:
+        return False
+
+# Ask user for input and check strength
+user_password = input("Enter your password: ")
+
+if check_password_strength(user_password):
+    print("✅ Your password is strong.")
+else:
+    print("Password doesn't meet the criteria.")
